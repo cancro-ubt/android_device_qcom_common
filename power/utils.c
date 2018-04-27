@@ -66,11 +66,18 @@ static void *get_qcopt_handle()
                 NULL)) {
         handle = dlopen(qcopt_lib_path, RTLD_NOW);
         if (!handle) {
-            ALOGE("Unable to open %s: %s\n", qcopt_lib_path,
+            ALOGE("1 Unable to open %s: %s\n", qcopt_lib_path,
+                    dlerror());
+        }
+    }else{
+        ALOGE("2 Unable to open %s: \n", qcopt_lib_path);
+        handle = dlopen("libqti-perfd-client.so", RTLD_NOW);
+        if (!handle) {
+            ALOGE("3 Unable to open %s: %s\n", qcopt_lib_path,
                     dlerror());
         }
     }
-
+    
     return handle;
 }
 
